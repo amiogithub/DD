@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Mother's Day & Birthday!</title>
+    
+    <!-- Adding background music that autoplays -->
+    <audio id="bgMusic" loop>
+        <source src="Happy Birthday song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', 'Marker Felt', cursive;
+            background: linear-gradient(to bottom, #ffcce6, #fff0f5);
+            min-height: 100vh;
+            text-align: center;
+            position: relative;
+            padding-bottom: 60px; /* Added padding to ensure footer doesn't overlap content */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 20px 60px 20px; /* Added bottom padding */
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #ff4d94;
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .sub-message {
+            color: #ff66a3;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .message {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 3px dashed #ff99cc;
+        }
+
+        .message p {
+            color: #666;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .photo-frame {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 30px;
+            border: 10px solid white;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            transform: rotate(-3deg);
+        }
+
+        .balloon {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 3;
+        }
+
+        .balloon:after {
+            content: '';
+            position: absolute;
+            width: 1px;
+            height: 70px;
+            background-color: rgba(0, 0, 0, 0.2);
+            bottom: -70px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .balloon.red {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff4d4d'%3E%3Cpath d='M12 2C8 2 5 5 5 9c0 4 5 10 7 13 2-3 7-9 7-13 0-4-3-7-7-7z'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .balloon.pink {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff66a3'%3E%3Cpath d='M12 2C8 2 5 5 5 9c0 4 5 10 7 13 2-3 7-9 7-13 0-4-3-7-7-7z'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .balloon.purple {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239966ff'%3E%3Cpath d='M12 2C8 2 5 5 5 9c0 4 5 10 7 13 2-3 7-9 7-13 0-4-3-7-7-7z'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .flower {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 2;
+            transform-origin: center;
+        }
+
+        .flower.pink {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='10' fill='%23FFEB3B' /%3E%3Cpath d='M50,30 Q60,40 50,50 Q40,40 50,30' fill='%23FF80AB' transform='rotate(0, 50, 50)' /%3E%3Cpath d='M50,30 Q60,40 50,50 Q40,40 50,30' fill='%23FF80AB' transform='rotate(72, 50, 50)' /%3E%3Cpath d='M50,30 Q60,40 50,50 Q40,40 50,30' fill='%23FF80AB' transform='rotate(144, 50, 50)' /%3E%3Cpath d='M50,30 Q60,40 50,50 Q40,40 50,30' fill='%23FF80AB' transform='rotate(216, 50, 50)' /%3E%3Cpath d='M50,30 Q60,40 50,50 Q40,40 50,30' fill='%23FF80AB' transform='rotate(288, 50, 50)' /%3E%3C/svg%3E");
+        }
+
+        .flower.purple {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='10' fill='%23FFEB3B' /%3E%3Cpath d='M50,30 Q60,40 50,50 Q40,40 50,30' fill='%23CE93D8' transform='rotate(0, 50, 50)' /%3E%3Cpath d='M50,30 Q60,40 50,50 Q40,40 50,30' fill='%23CE93D8' transform='rotate(72, 50, 50)' /%3E%3Cpath d='M50,30 Q60,40 50,50 Q40,40 50,30' fill='%23CE93D8' transform='rotate(144, 50, 50)' /%3E%3Cpath d='M50,30 Q60,40 50,50 Q40,40 50,30' fill='%23CE93D8' transform='rotate(216, 50, 50)' /%3E%3Cpath d='M50,30 Q60,40 50,50 Q40,40 50,30' fill='%23CE93D8' transform='rotate(288, 50, 50)' /%3E%3C/svg%3E");
+        }
+
+        .flower.red {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='10' fill='%23FFEB3B' /%3E%3Cpath d='M50,30 Q60,40 50,50 Q40,40 50,30' fill='%23EF9A9A' transform='rotate(0, 50, 50)' /%3E%3Cpath d='M50,30 Q60,40 50,50 Q40,40 50,30' fill='%23EF9A9A' transform='rotate(72, 50, 50)' /%3E%3Cpath d='M50,30 Q60,40 50,50 Q40,40 50,30' fill='%23EF9A9A' transform='rotate(144, 50, 50)' /%3E%3Cpath d='M50,30 Q60,40 50,50 Q40,40 50,30' fill='%23EF9A9A' transform='rotate(216, 50, 50)' /%3E%3Cpath d='M50,30 Q60,40 50,50 Q40,40 50,30' fill='%23EF9A9A' transform='rotate(288, 50, 50)' /%3E%3C/svg%3E");
+        }
+
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff4d4d'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 2;
+        }
+
+        .ribbon {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 120px;
+            height: 120px;
+            overflow: hidden;
+            z-index: 20;
+        }
+
+        .ribbon-content {
+            position: absolute;
+            display: block;
+            width: 180px;
+            padding: 10px 0;
+            background-color: #ff6699;
+            box-shadow: 0 5px 10px rgba(0,0,0,.1);
+            color: white;
+            font-size: 14px;
+            text-shadow: 0 1px 1px rgba(0,0,0,.2);
+            text-transform: uppercase;
+            text-align: center;
+            left: -10px;
+            top: 25px;
+            transform: rotate(45deg);
+        }
+
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #ff6699;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 100;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            background-color: #ff99cc;
+        }
+
+        .music-control svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #ff66a3;
+            font-size: 14px;
+            background-color: rgba(255, 240, 245, 0.7);
+            padding: 5px 0;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Happy Birthday!</h1>
+        <div class="sub-message">To the most amazing mom in the world! 💖</div>
+        
+        <div class="photo-frame">
+            <img src="photo_6134096816866704190_y (1).jpg" alt="Mom's Photo" style="width: 100%; height: 100%; object-fit: cover;">
+            <div class="ribbon">
+                <span class="ribbon-content">We Love You!</span>
+            </div>
+        </div>
+        
+        <div class="message">
+            <p>প্রিয় মা, </p>
+            <p>এই বিশেষ দিনে, যেটা তোমার জন্মদিন উদযাপন করে, আমি তোমাকে ধন্যবাদ জানাতে চাই—তোমার সব ভালোবাসা, যত্ন আর সহানুভূতির জন্য, যা তুমি আমাদের দুজন—আমাকে আর অর্পাকে—জীবনের শুরু থেকে দিয়ে আসছো । </p>
+            <p>তোমার শক্তি, প্রজ্ঞা, আর নিঃস্বার্থ ভালোবাসা আমাদের গড়ে তুলেছে আজকের আমরা যারা।</p>
+            <p>তোমার জীবনে যেন থাকে অসীম সুখ আর আনন্দ—এই প্রার্থনাই করি।</p>
+            <p>সব ভালোবাসা দিয়ে,</p>
+            <p>রামিসা ও অর্পা ❤️ ❤️</p>
+        </div>
+    </div>
+    
+    <!-- Music control button -->
+    <div class="music-control" id="musicControl">
+        <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+        </svg>
+        <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display:none;">
+            <path d="M8 5v14l11-7z"/>
+        </svg>
+    </div>
+    
+    <div class="hearts-container" id="hearts-container"></div>
+    
+    <footer>Made with ❤️ for Mom</footer>
+
+    <script>
+        // Create flowers
+        function createFlowers(count) {
+            const container = document.body;
+            const types = ['pink', 'purple', 'red'];
+            
+            for (let i = 0; i < count; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'flower ' + types[Math.floor(Math.random() * types.length)];
+                
+                // Random positions
+                const posX = Math.random() * window.innerWidth;
+                const posY = Math.random() * window.innerHeight;
+                
+                flower.style.left = posX + 'px';
+                flower.style.top = posY + 'px';
+                
+                // Random sizes
+                const size = 20 + Math.random() * 30;
+                flower.style.width = size + 'px';
+                flower.style.height = size + 'px';
+                
+                // Random rotation
+                const rotation = Math.random() * 360;
+                flower.style.transform = `rotate(${rotation}deg)`;
+                
+                container.appendChild(flower);
+            }
+        }
+
+        // Create hearts
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                
+                // Start from bottom of page
+                const posX = Math.random() * window.innerWidth;
+                const posY = window.innerHeight;
+                
+                heart.style.left = posX + 'px';
+                heart.style.top = posY + 'px';
+                
+                // Random sizes
+                const size = 15 + Math.random() * 15;
+                heart.style.width = size + 'px';
+                heart.style.height = size + 'px';
+                
+                // Animation
+                animateHeart(heart);
+                
+                container.appendChild(heart);
+                
+                // Create a new heart every few seconds
+                setTimeout(createHeart, 2000 + Math.random() * 3000);
+            }
+            
+            createHeart(); // Start the first heart
+        }
+
+        function animateHeart(heart) {
+            const duration = 8000 + Math.random() * 7000;
+            const startX = parseFloat(heart.style.left);
+            const startY = parseFloat(heart.style.top);
+            const targetY = -100; // Move above the viewport
+            
+            let timeStart = null;
+            
+            function step(timestamp) {
+                if (!timeStart) timeStart = timestamp;
+                const progress = (timestamp - timeStart) / duration;
+                
+                if (progress >= 1) {
+                    heart.remove();
+                    return;
+                }
+                
+                // Create a floating effect with sine waves
+                const newX = startX + Math.sin(progress * 5) * 50;
+                const newY = startY + (targetY - startY) * progress;
+                
+                heart.style.left = newX + 'px';
+                heart.style.top = newY + 'px';
+                
+                // Add gentle swaying and fading
+                heart.style.transform = `rotate(${Math.sin(progress * 10) * 20}deg)`;
+                heart.style.opacity = 1 - progress;
+                
+                requestAnimationFrame(step);
+            }
+            
+            requestAnimationFrame(step);
+        }
+
+        // Create balloons
+        function createBalloons(count) {
+            const container = document.body;
+            const types = ['red', 'pink', 'purple'];
+            
+            for (let i = 0; i < count; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon ' + types[Math.floor(Math.random() * types.length)];
+                
+                // Start from bottom of page
+                const posX = 50 + Math.random() * (window.innerWidth - 100);
+                const posY = window.innerHeight;
+                
+                balloon.style.left = posX + 'px';
+                balloon.style.top = posY + 'px';
+                
+                // Random sizes
+                const size = 30 + Math.random() * 20;
+                balloon.style.width = size + 'px';
+                balloon.style.height = (size * 1.25) + 'px';
+                
+                // Animation
+                animateBalloon(balloon);
+                
+                container.appendChild(balloon);
+            }
+        }
+
+        function animateBalloon(balloon) {
+            const duration = 15000 + Math.random() * 15000;
+            const startX = parseFloat(balloon.style.left);
+            const startY = parseFloat(balloon.style.top);
+            const targetY = -100; // Move above the viewport
+            
+            let timeStart = null;
+            
+            function step(timestamp) {
+                if (!timeStart) timeStart = timestamp;
+                const progress = (timestamp - timeStart) / duration;
+                
+                if (progress >= 1) {
+                    // Remove balloon and create a new one
+                    balloon.remove();
+                    const newBalloon = document.createElement('div');
+                    const types = ['red', 'pink', 'purple'];
+                    newBalloon.className = 'balloon ' + types[Math.floor(Math.random() * types.length)];
+                    
+                    const posX = 50 + Math.random() * (window.innerWidth - 100);
+                    newBalloon.style.left = posX + 'px';
+                    newBalloon.style.top = window.innerHeight + 'px';
+                    
+                    const size = 30 + Math.random() * 20;
+                    newBalloon.style.width = size + 'px';
+                    newBalloon.style.height = (size * 1.25) + 'px';
+                    
+                    document.body.appendChild(newBalloon);
+                    animateBalloon(newBalloon);
+                    return;
+                }
+                
+                // Create a floating effect with sine waves
+                const newX = startX + Math.sin(progress * 5) * 50;
+                const newY = startY + (targetY - startY) * progress;
+                
+                balloon.style.left = newX + 'px';
+                balloon.style.top = newY + 'px';
+                
+                // Add gentle swaying
+                balloon.style.transform = `rotate(${Math.sin(progress * 10) * 10}deg)`;
+                
+                requestAnimationFrame(step);
+            }
+            
+            requestAnimationFrame(step);
+        }
+
+        // Initialize
+        window.addEventListener('load', function() {
+            createFlowers(25);  // Lots of flowers
+            createBalloons(8);  // Some balloons
+            createHearts();     // Floating hearts
+            
+            // Initialize background music
+            const bgMusic = document.getElementById('bgMusic');
+            const musicControl = document.getElementById('musicControl');
+            const pauseIcon = document.getElementById('pauseIcon');
+            const playIcon = document.getElementById('playIcon');
+            
+            // Start playing music automatically
+            bgMusic.volume = 0.5; // Set volume to 50%
+            
+            // Need to start playing after a user interaction due to browser policies
+            // We'll try to autoplay, but have a fallback
+            let playPromise = bgMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Autoplay started successfully
+                }).catch(error => {
+                    // Autoplay was prevented
+                    // Show the play icon instead
+                    pauseIcon.style.display = 'none';
+                    playIcon.style.display = 'block';
+                });
+            }
+            
+            // Toggle music when the button is clicked
+            musicControl.addEventListener('click', function() {
+                if (bgMusic.paused) {
+                    bgMusic.play();
+                    pauseIcon.style.display = 'block';
+                    playIcon.style.display = 'none';
+                } else {
+                    bgMusic.pause();
+                    pauseIcon.style.display = 'none';
+                    playIcon.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
